@@ -1,0 +1,6 @@
+.InputComponent {
+    min-width: 100%;
+    border: 1px solid #a7ccdb;
+    text-align: left;
+    padding: 8px;
+}

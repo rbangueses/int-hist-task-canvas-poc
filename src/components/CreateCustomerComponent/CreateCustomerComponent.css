@@ -1,0 +1,42 @@
+.labelz{
+    display: inline-block;
+    clear: left;
+    width: 200px;
+    text-align: left;
+    margin-left: 10px;
+}
+
+input {
+  padding: 3px;
+  box-shadow: 3px 3px 5px #362a89;
+  font-size: 14px;
+  font-weight: 600;
+  width: 200px;
+}
+
+.CreateCustomerButton{
+    --background: #362a89;
+    --background-hover: #291f6e;
+    --text: #fff;
+    --icon: #fff;
+    display: flex;
+    outline: none;
+    cursor: pointer;
+    border: 0;
+    min-width: 130px;
+    margin-top:10px;
+    margin-left:10px;
+    text-align: center;
+    border-radius: 11px;
+    line-height: 24px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    overflow: hidden;
+    color: var(--text);
+    background: var(--b, var(--background));
+    transition: transform 0.3s, background 0.4s, -webkit-transform 0.3s;
+    transform: scale(var(--scale, 1)) translateZ(0);
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+}

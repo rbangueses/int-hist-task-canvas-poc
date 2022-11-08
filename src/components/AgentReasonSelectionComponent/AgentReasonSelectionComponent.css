@@ -1,0 +1,21 @@
+select {
+    border: 0 none;
+    color: #FFFFFF;
+    width: 215px;
+    font-weight: 600;
+    line-height: 1.25rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    text-transform: initial;
+    background-color: rgb(2, 99, 224);
+  }
+  
+  /* #mainselection {
+    overflow: hidden;
+    width: 350px;
+    -moz-border-radius: 9px 9px 9px 9px;
+    -webkit-border-radius: 9px 9px 9px 9px;
+    border-radius: 9px 9px 9px 9px;
+    box-shadow: 1px 1px 11px #330033; */
+    /* background: url("arrow.gif") no-repeat scroll 319px 5px #58B14C; */
+  /* } */

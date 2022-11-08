@@ -1,0 +1,27 @@
+.InteractionHistoryCanvasTable {
+    border-collapse: collapse;
+    min-width: 100vw;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+
+.InteractionHistoryCanvasTable td, th{
+    text-align: left;
+    padding: 6px;
+}
+
+.InteractionHistoryCanvasTableDetails {
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.InteractionHistoryCanvasTableDetails td, th {
+    border: 1px solid #a7ccdb;
+    text-align: left;
+    padding: 6px;
+    max-width:200px;
+}
+
+.InteractionHistoryCanvasTableDetails tr:nth-child(even) {
+    background-color: #a7ccdb;
+}
