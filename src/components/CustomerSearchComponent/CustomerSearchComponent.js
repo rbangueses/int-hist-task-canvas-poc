@@ -19,21 +19,16 @@ class CustomerSearchComponent extends Component {
     }
   
     render() {
-
         return (
           <div>
             <table>
                 <tr>
-                    <td> <label>Search number </label></td><td><input type="text" id="searchNumberId" name="searchNumber" value={this.state.searchNumber} placeholder="Phone number" onChange={this.handleChange} /></td>
+                    <td> <label>Search by phone number </label></td><td><input type="text" id="searchNumberId" name="searchNumber" value={this.state.searchNumber} placeholder="Phone number" onChange={this.handleChange} /></td>
                 </tr>
                 <tr>
                     <td><button class="SearchCustomerButton" onClick={ () => {this.props.handlePhoneChange(this.state.searchNumber)}}>Search</button></td><td></td>
                 </tr>
             </table>
-              {/* <label>Search number: <input type="text" id="searchNumberId" name="searchNumber" value={this.state.searchNumber} placeholder="Phone number" onChange={this.handleChange} /> </label>
-              <br></br>
-              <br></br> */}
-              {/* <button class="SearchCustomerButton" onClick={ () => {this.props.handlePhoneChange(this.state.searchNumber)}}>Search</button> */}
           </div>
         );      
     }

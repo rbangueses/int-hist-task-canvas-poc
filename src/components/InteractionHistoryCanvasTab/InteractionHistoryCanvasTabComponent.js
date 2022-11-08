@@ -8,38 +8,22 @@ class InteractionHistoryCanvasTabComponent extends React.Component {
         super(props);
         this.state = {
             showReasonAndNotes : false,
-            reason : "",
-            agentcomment: "",
-            finalPhoneNumber: ""
         }
-        // this.updateFinalNumber = this.updateFinalNumber.bind(this);
-        // this.updateShowReasonAndNotes = this.updateShowReasonAndNotes.bind(this);
       }
     
-    updateFinalNumber = (number) =>{
-        this.setState({
-            finalPhoneNumber : number
-        })
-        console.log('hit updateFinalNumber ', number);
-    }
     updateShowReasonAndNotes = (boolean) => {
         this.setState({
             showReasonAndNotes : boolean
         })
-        console.log('hit updateShowReasonAndNotes ', boolean);
-        this.props.changeMetadata('reasons');
     }
 
     render() { 
-        const { task } = this.props;
-        console.log(this.props);
-        //console.log(this.props);      
+        const { task } = this.props;    
         if(this.state.showReasonAndNotes){
             return (
                 <div key='int-hist-canvas-div'>
                     <br></br>
-                    {/* <InteractionHistoryComponent key='int-hist-comp-key' task={{task}} updateFinalNumber={this.updateFinalNumber} ></InteractionHistoryComponent> */}
-                    <InteractionHistoryComponent key='int-hist-comp-key' task={{task}} setFinalNumber={this.updateFinalNumber} updateShowReasonAndNotes={this.updateShowReasonAndNotes} ></InteractionHistoryComponent>
+                    <InteractionHistoryComponent key='int-hist-comp-key' task={{task}} updateShowReasonAndNotes={this.updateShowReasonAndNotes} ></InteractionHistoryComponent>
                     <br></br>
                     <AgentReasonSelectionComponent key='agent-reason-component-key'></AgentReasonSelectionComponent>
                     <br></br>

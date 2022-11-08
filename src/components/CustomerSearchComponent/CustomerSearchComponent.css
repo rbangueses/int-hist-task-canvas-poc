@@ -13,9 +13,10 @@ font-size: 14px;
 font-weight: 600;
 width: 200px;
 }
+
 .SearchCustomerButton{
-    --background: #362a89;
-    --background-hover: #291f6e;
+    --background: rgb(2, 99, 224);
+    --background-hover: rgb(2, 99, 224);
     --text: #fff;
     --icon: #fff;
     display: flex;

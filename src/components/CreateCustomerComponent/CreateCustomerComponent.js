@@ -14,10 +14,10 @@ class CreateCustomerComponent extends Component {
         accountId : "",
         showInterface: true
       };
-      this.handleChange = this.handleChange.bind(this);
+      // this.handleChange = this.handleChange.bind(this);
     }
   
-    handleChange(e) {
+    handleChange = (e) => {
       this.setState({
         [e.target.name] : e.target.value
       })
@@ -63,22 +63,6 @@ class CreateCustomerComponent extends Component {
               </table>
               <br></br>
           </div>
-
-          // <div>
-          // <label class="labelz">Phone number: <input type="text" id="phoneNumberId" name="phoneNumber" value={this.state.phoneNumber} placeholder="Phone number" onChange={this.handleChange} /> </label>
-          // <br></br>
-          // <label class="labelz">First name: <input type="text" id="firstNameId" name="firstName" value={this.state.firstName} placeholder="First name" onChange={this.handleChange} /> </label>
-          // <br></br>
-          // <label class="labelz">Last name: <input type="text" id="lastNameId" name="lastName" value={this.state.lastName} placeholder="Last name" onChange={this.handleChange} /> </label>
-          // <br></br>
-          // <label class="labelz">Email: <input type="text" id="emailId" name="email" value={this.state.email} placeholder="Email" onChange={this.handleChange} /> </label>
-          // <br></br>
-          // <label class="labelz">Account ID: <input type="text" id="accountIdId" name="accountId" value={this.state.accountId} placeholder="Account ID" onChange={this.handleChange} /> </label>
-          // <br></br>
-          // <br></br>
-          // <button class="CreateCustomerButton" onClick={ () => {this.createCustomerAttempt(this.state.firstName, this.state.lastName, this.state.phoneNumber, this.state.email, this.state.accountId); {this.props.handleCreateCustomer}}}>Create customer</button>
-          // {/* <button class="CreateCustomerButton" onClick={ () => {{this.props.handler()}; console.log("clicked on button")}}>Create customer</button> */}
-          // </div>
         );
       }
       else return (

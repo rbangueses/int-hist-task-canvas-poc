@@ -15,8 +15,8 @@ input {
 }
 
 .CreateCustomerButton{
-    --background: #362a89;
-    --background-hover: #291f6e;
+    --background: rgb(2, 99, 224);
+    --background-hover: rgb(2, 99, 224);
     --text: #fff;
     --icon: #fff;
     display: flex;
