@@ -23,6 +23,9 @@ class AgentReasonSelectionComponent extends Component {
                <select id="reasonId" onChange={this.handleChange} value={this.state.reason}>
                   <option value="select">Select Interaction Reason</option>
                   <option value="Update Details">Update Details</option>
+                  <option value="New Car Insurance Policy">New Car Insurance Policy</option>
+                  <option value="New Home Insurance Policy">New Home Insurance Policy</option>
+                  <option value="New Health Insurance Policy">New Health Insurance Policy</option>
                   <option value="Renewal">Renewal</option>
                   <option value="Cancellation">Cancellation</option>
                   <option value="Other">Other</option>
