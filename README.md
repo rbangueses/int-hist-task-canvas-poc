@@ -27,7 +27,7 @@ The plugin will also prevent creating a new customer with the same phone number 
 
 https://user-images.githubusercontent.com/98812531/200868840-2202b072-d856-4d63-8985-e87387ca2508.mov
 
-The delete functionality has been implemented but has been commented out. You can make it appear by removing the respective comments on InteractionHistoryComponent.js . For GDPR purposes (right to be forgotten) it's probably best to deal with deletions manually via the Firestore GUI, as agents generally should not have the ability to delete customer records.
+The delete functionality has been implemented but has been commented out. You can make it appear by removing the respective comments on InteractionHistoryComponent.js 
 
 
 ## Setup
@@ -68,3 +68,11 @@ Reason codes are defined on AgentReasonSelectionComponent.
 ## Make fields optional
 
 To make customer record fields optional please edit the CreateCustomerComponent.
+
+## Other things to consider
+
+- You need to consider edge cases like a customer changing phone number. This can be managed directly on the Firestore GUI, by copying the existing doc and creating a new one with the new phone number. If you want agents to have this capability you will need to add this logic to the plugin.
+- For GDPR purposes (right to be forgotten) it's probably best to deal with deletions manually via the Firestore GUI, as agents generally should not have the ability to delete customer records.
+- If you want to publish some of the data into a CRM or external data store you can edit the plugin, adding that logic on the beforeCompleteTask listener.
+
+Some edge cases may have been missed and a code review is recommended before moving this to production.
