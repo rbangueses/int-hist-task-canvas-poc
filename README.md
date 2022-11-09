@@ -55,11 +55,11 @@ Go to your Twilio console and create 4 new functions based on the files in root/
 Download and install - npm install
 
 Please make sure you edit the environment variables, rename the .env.example to .env and fill these in:
-CREATE_CUSTOMER_URL= url of your Twilio function /createCustomerRecord
-ADD_INT_URL= url of your Twilio function /addInteraction
-GET_INT_URL=url of your Twilio function /addInteraction
-DEL_INT_URL= url of your Twilio function /deleteInteraction
-MAX_RECORDS_PRESENTED: defines the maximum number of records shown, ordered by date (most recent X records are shown)
+- CREATE_CUSTOMER_URL= url of your Twilio function /createCustomerRecord
+- ADD_INT_URL= url of your Twilio function /addInteraction
+- GET_INT_URL=url of your Twilio function /addInteraction
+- DEL_INT_URL= url of your Twilio function /deleteInteraction
+- MAX_RECORDS_PRESENTED: defines the maximum number of records shown, ordered by date (most recent X records are shown)
 
 ## Editing reason codes 
 
