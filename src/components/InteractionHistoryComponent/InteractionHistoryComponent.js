@@ -4,6 +4,9 @@ import {compareNumbers, epochToDate} from '../../helpers/utilities';
 import CreateCustomerComponent from '../CreateCustomerComponent/CreateCustomerComponent';
 import CustomerSearchComponent from '../CustomerSearchComponent/CustomerSearchComponent';
 import './InteractionHistoryComponent.css';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: '.env' });
 
 class InteractionHistoryComponent extends Component {
     constructor(props) {
@@ -51,12 +54,12 @@ class InteractionHistoryComponent extends Component {
                 this.setState({newCustomer : true})
                 this.setState({interactionHistoryFetched : true})
                 this.props.updateShowReasonAndNotes(false); 
-                console.log("no customer found");
+                //console.log("no customer found");
             }
             else{
                 this.setState({interactionHistory: interactionHistory})
                 this.setState({interactionHistoryFetched : true})
-                console.log("customer found");
+                //console.log("customer found");
                 this.props.updateShowReasonAndNotes(true); 
             }
         }
@@ -68,7 +71,7 @@ class InteractionHistoryComponent extends Component {
             return (
                 <div>
                     <CustomerSearchComponent key='cust-search-key' handlePhoneChange={this.handlePhoneChange}></CustomerSearchComponent>
-                    <CreateCustomerComponent key='create-cust-key' phoneNumber={task.attributes.from} handler={this.handler}></CreateCustomerComponent>  
+                    <CreateCustomerComponent key='create-cust-key' phoneNumber={this.state.phoneNumber} handler={this.handler}></CreateCustomerComponent>  
                 </div>
             )
         }
@@ -85,7 +88,7 @@ class InteractionHistoryComponent extends Component {
                 interactionLogsArray.join();
                 interactionLogsArray.sort(compareNumbers);
                 //save a limited view of interaction history
-                var maxRecords = 10;
+                var maxRecords = process.env.MAX_RECORDS_PRESENTED;
                 limitedInteractionLogsArray = interactionLogsArray.slice(0, maxRecords);
                 
                 return (
@@ -160,7 +163,6 @@ class InteractionHistoryComponent extends Component {
                         </table>
                         <br></br>
                         There is no interaction history yet.
- 
                     </div>
                 )
             }
@@ -170,7 +172,6 @@ class InteractionHistoryComponent extends Component {
             </div>
         );
     }
-
 }
 
 export default InteractionHistoryComponent;

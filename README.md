@@ -25,7 +25,14 @@ Finally, install the [Flex Plugin extension](https://github.com/twilio-labs/plug
 twilio plugins:install @twilio-labs/plugin-flex
 ```
 
-## Development
+## Environment variables
 
-Run `twilio flex:plugins --help` to see all the commands we currently support. For further details on Flex Plugins refer to our documentation on the [Twilio Docs](https://www.twilio.com/docs/flex/developer/plugins/cli) page.
+MAX_RECORDS_PRESENTED: defines the maximum number of records shown, ordered by date (most recent X records are shown)
 
+## Editing reason codes 
+
+Reason codes are defined on AgentReasonSelectionComponent.
+
+## Make fields optional
+
+To make customer record fields optional please edit the CreateCustomerComponent.

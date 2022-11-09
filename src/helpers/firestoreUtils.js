@@ -1,4 +1,26 @@
-export function createCustomer(firstName, lastName, phoneNumber, email, accountId){
+import {Notifications, NotificationType, NotificationBar} from "@twilio/flex-ui";
+import dotenv from 'dotenv';
+
+dotenv.config({ path: '.env' });
+
+Notifications.registerNotification({
+  id: "customerAlreadyExists",
+  closeButton: true,
+  content: "This phone number is already assigned to an existing customer record.",
+  timeout: 3000,
+  type: NotificationType.warning,
+  actions: [
+      <NotificationBar.Action
+          onClick={(_, notification) => {
+              Flex.Notifications.dismissNotification(notification);
+          }}
+          label="Creating new customer"
+          icon="Bell"
+      />
+  ]
+});
+
+export async function createCustomer(firstName, lastName, phoneNumber, email, accountId){
   const options = {
     method: 'GET',
     headers: {
@@ -6,15 +28,24 @@ export function createCustomer(firstName, lastName, phoneNumber, email, accountI
     }
   };
 
-  return new Promise((resolve, reject) =>{
-    fetch(`https://interaction-history-2893.twil.io/createCustomerRecord?phoneNumber=${phoneNumber}&firstName=${firstName}&lastName=${lastName}&email=${email}&accountId=${accountId}`, options)
-    .then(data => {
-      resolve(data);
+  //check if there is a customer with this number first
+  const prevHistory = await getInteractionHistory(phoneNumber);
+  if(typeof prevHistory.firstName !== 'undefined'){
+    console.log("This phone number is already assigned to a customer.");
+    Notifications.showNotification("customerAlreadyExists");
+    return;
+  }
+  else {
+    return new Promise((resolve, reject) =>{
+      fetch(`${process.env.CREATE_CUSTOMER_URL}?phoneNumber=${phoneNumber}&firstName=${firstName}&lastName=${lastName}&email=${email}&accountId=${accountId}`, options)
+      .then(data => {
+        resolve(data);
+      })
     })
-  })
+  }
 }
 
-export function addInteractionHistory(phoneNumber, task, reason, agentComment){
+export async function addInteractionHistory(phoneNumber, task, reason, agentComment){
     const options = {
       method: 'GET',
       headers: {
@@ -31,15 +62,14 @@ export function addInteractionHistory(phoneNumber, task, reason, agentComment){
       reason = 'No Selection';
   
     return new Promise((resolve, reject) =>{
-      fetch(`https://interaction-history-2893.twil.io/addInteraction?phoneNumber=${phoneNumber}&queue=${task.queueName}&channel=${channel}&reason=${reason}&agentComment=${agentComment}`, options)
+      fetch(`${process.env.ADD_INT_URL}?phoneNumber=${phoneNumber}&queue=${task.queueName}&channel=${channel}&reason=${reason}&agentComment=${agentComment}`, options)
       .then(data => {
         resolve(data);
       })
     })
 }
 
-export function getInteractionHistory(phoneNumber){
-
+export async function getInteractionHistory(phoneNumber){
   const options = {
     method: 'GET',
     headers: {
@@ -49,7 +79,7 @@ export function getInteractionHistory(phoneNumber){
 
   return new Promise((resolve, reject) =>{
     //perform get request and return data
-    fetch('https://interaction-history-2893.twil.io/fetchCustomerDetails?phoneNumber=' + phoneNumber, options)
+    fetch(`${process.env.GET_INT_URL}?phoneNumber=${phoneNumber}`, options)
     .then(response => response.json())
     .then(data => {
       resolve(data);
@@ -57,7 +87,7 @@ export function getInteractionHistory(phoneNumber){
   })
 } 
 
-export function deleteInteraction(phoneNumber, timestamp){
+export async function deleteInteraction(phoneNumber, timestamp){
 
   // console.log("called function deleteInteraction");
   // console.log(phoneNumber);
@@ -70,7 +100,7 @@ export function deleteInteraction(phoneNumber, timestamp){
   };
 
   return new Promise((resolve, reject) =>{
-    fetch(`https://interaction-history-2893.twil.io/deleteInteraction?phoneNumber=${phoneNumber}&timestamp=${timestamp}`, options)
+    fetch(`${process.env.DEL_INT_URL}?phoneNumber=${phoneNumber}&timestamp=${timestamp}`, options)
     .then(data => {
       resolve(data);
     })

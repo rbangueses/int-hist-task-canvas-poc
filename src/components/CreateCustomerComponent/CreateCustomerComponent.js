@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
 import {createCustomer} from '../../helpers/firestoreUtils';
 import './CreateCustomerComponent.css';
+import {Notifications, NotificationType, NotificationBar} from "@twilio/flex-ui";
 
+//notification used when creating a new customer record - if require fields are mossing
+Notifications.registerNotification({
+  id: "fieldsMissing",
+  closeButton: true,
+  content: "One or more fields need to be filled in.",
+  timeout: 3000,
+  type: NotificationType.warning,
+  actions: [
+      <NotificationBar.Action
+          onClick={(_, notification) => {
+              Flex.Notifications.dismissNotification(notification);
+          }}
+          label="Creating new customer"
+          icon="Bell"
+      />
+  ]
+});
 
 class CreateCustomerComponent extends Component {
     constructor(props) {
@@ -24,16 +42,16 @@ class CreateCustomerComponent extends Component {
     }
 
     //before we create a customer we need to verify fields have ANY input, probably need to be more thorough here
-    createCustomerAttempt(firstName, lastName, phoneNumber, email, accountId){
+    async createCustomerAttempt(firstName, lastName, phoneNumber, email, accountId){
         if(firstName.length > 0 && lastName.length > 0 && phoneNumber.length > 0 && email.length > 0 && accountId.length > 0){
-            createCustomer(firstName, lastName, phoneNumber, email, accountId);
-            this.props.handler();
+            await createCustomer(firstName, lastName, phoneNumber, email, accountId);
             this.setState({
               showInterface : false
             })
+            this.props.handler();
         }      
         else {
-            alert("One or more fields need to be filled in!");
+            Notifications.showNotification("fieldsMissing");
         }   
     }
   
