@@ -15,7 +15,8 @@ class InteractionHistoryComponent extends Component {
             interactionHistory : '',
             interactionHistoryFetched: false,
             newCustomer: false,
-            phoneNumber: '' //we use this one instead of the task attribute because the agent may assign this call to a different number for interaction history purposes
+            phoneNumber: '', //we use this one instead of the task attribute because the agent may assign this call to a different number for interaction history purposes
+            originalNumber: ''
         }
     }  
 
@@ -36,20 +37,48 @@ class InteractionHistoryComponent extends Component {
             interactionHistoryFetched: false,
             newCustomer : false
         })
+        this.setNumberOnTaskAttribute(searchNumber);
     }
+
+    setNumberOnTaskAttribute = (number) => {
+        const { task } = this.props.task;
+        /** Set phone number on task attribute*/
+        let attributes = task.attributes;
+        // merge new attributes
+        attributes = Object.assign(attributes, {
+            phoneNumber: number
+            }
+        );
+        // set new attributes on the task
+        task.setAttributes(attributes);
+        this.props.updateShowReasonAndNotes(true); 
+    }
+
     async componentDidMount(){
         const { task } = this.props.task;
         if(typeof task.attributes.from !== 'undefined'){
             this.setState({
                 phoneNumber : task.attributes.from
-            })  
+            })
+            this.setNumberOnTaskAttribute(task.attributes.from);  
         }
     }
 
     async componentDidUpdate(){
         const { task } = this.props.task;
+        //manage concurrent tasks
+        //TODO
+        console.log(task.attributes)
+        console.log(task.attributes.phoneNumber);
+        if(task.attributes.phoneNumber !== this.state.phoneNumber){
+            console.log("time to search again");
+            this.state.interactionHistoryFetched = false;
+            //swap over
+            this.state.phoneNumber = task.attributes.phoneNumber;
+        }
+
         if(!this.state.interactionHistoryFetched){
-            var interactionHistory = await getInteractionHistory(this.state.phoneNumber);
+            var interactionHistory = await getInteractionHistory(task.attributes.phoneNumber);
             if(typeof interactionHistory.firstName === 'undefined'){
                 this.setState({newCustomer : true})
                 this.setState({interactionHistoryFetched : true})
@@ -59,8 +88,11 @@ class InteractionHistoryComponent extends Component {
             else{
                 this.setState({interactionHistory: interactionHistory})
                 this.setState({interactionHistoryFetched : true})
+                this.props.updateShowReasonAndNotes(true);
                 //console.log("customer found");
-                this.props.updateShowReasonAndNotes(true); 
+
+                /** Set phone number on task attribute*/
+                //this.setNumberOnTaskAttribute(this.state.phoneNumber);
             }
         }
     }
