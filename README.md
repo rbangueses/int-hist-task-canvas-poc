@@ -1,6 +1,6 @@
 # Interaction History on Task Canvas Tab   
 
-This sample plugin presents interaction history within the Flex Task Canvas Tab. In the current implementation, the data is stored in a Google Firestore NoSQL document database. All customers will be identified by the phone number, i.e. the unique identifier for a customer interaciton record will be the phone number.
+This sample plugin presents interaction history within the Flex Task Canvas Tab. In the current implementation, the data is stored in a Google Firestore NoSQL document database. All customers will be identified by the phone number, i.e. the unique identifier for a customer interaction record will be the phone number.
 
 This plugin provides the following capabilities:
 - Present the interaction history of the caller phone number to the agent by default. The agent can then select a reason for the contact and leave a comment for future reference. In the event there is no customer interaction history record, the agent can create a new customer record. The agent can also search for a different number.
