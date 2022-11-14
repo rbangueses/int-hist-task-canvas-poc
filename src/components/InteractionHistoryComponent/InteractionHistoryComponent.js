@@ -70,11 +70,13 @@ class InteractionHistoryComponent extends Component {
         //TODO
         console.log(task.attributes)
         console.log(task.attributes.phoneNumber);
+        if(typeof task.attributes.phoneNumber === 'undefined'){
+            this.setNumberOnTaskAttribute(task.attributes.from); 
+        }
         if(task.attributes.phoneNumber !== this.state.phoneNumber){
-            console.log("time to search again");
-            this.state.interactionHistoryFetched = false;
+            this.setState({ interactionHistoryFetched : false})
             //swap over
-            this.state.phoneNumber = task.attributes.phoneNumber;
+            this.setState({ phoneNumber : task.attributes.phoneNumber})
         }
 
         if(!this.state.interactionHistoryFetched){

@@ -34,7 +34,6 @@ class InteractionHistoryCanvasTabComponent extends React.Component {
         }
         else return(
             <div key='int-hist-canvas-div'>
-                <p>{this.state.test}</p>
                 <br></br>
                 <InteractionHistoryComponent key='int-hist-comp-key' task={{task}} updateShowReasonAndNotes={this.updateShowReasonAndNotes}></InteractionHistoryComponent>
             </div>  
